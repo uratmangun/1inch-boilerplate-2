@@ -9,8 +9,16 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Copy, ExternalLink, Search, Wallet, ArrowLeft } from 'lucide-react'
+import {
+  Copy,
+  ExternalLink,
+  Search,
+  Wallet,
+  ArrowLeft,
+  User,
+} from 'lucide-react'
 import { PrivyLoginButton } from '@/components/PrivyLoginButton'
+import { usePrivy } from '@privy-io/react-auth'
 import { useNavigate } from 'react-router-dom'
 import { getApiUrl, API_ENDPOINTS, DEFAULT_CHAIN } from '@/lib/constants'
 
@@ -26,10 +34,21 @@ interface TokenBalance {
 
 export function BalanceApiPage() {
   const navigate = useNavigate()
+  const { authenticated, user } = usePrivy()
   const [walletAddress, setWalletAddress] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [balances, setBalances] = useState<TokenBalance[]>([])
+  const [rawBalanceData, setRawBalanceData] = useState<Record<
+    string,
+    unknown
+  > | null>(null)
   const [error, setError] = useState<string | null>(null)
+
+  const usePrivyWallet = () => {
+    if (authenticated && user?.wallet?.address) {
+      setWalletAddress(user.wallet.address)
+    }
+  }
 
   // API call to fetch real balance data
   const fetchBalanceData = async (address: string): Promise<TokenBalance[]> => {
@@ -61,6 +80,9 @@ export function BalanceApiPage() {
       throw new Error(data.error || 'API request failed')
     }
 
+    // Store raw balance data
+    setRawBalanceData(data.data.raw)
+
     // Transform API response to match our TokenBalance interface
     return data.data.balances.map(
       (token: {
@@ -89,6 +111,7 @@ export function BalanceApiPage() {
     setIsLoading(true)
     setError(null)
     setBalances([])
+    setRawBalanceData(null)
 
     try {
       const balanceData = await fetchBalanceData(walletAddress)
@@ -162,6 +185,16 @@ export function BalanceApiPage() {
                 }
                 className="flex-1"
               />
+              {authenticated && user?.wallet?.address && (
+                <Button
+                  onClick={usePrivyWallet}
+                  variant="outline"
+                  className="flex items-center gap-2"
+                >
+                  <User className="h-4 w-4" />
+                  Use My Wallet
+                </Button>
+              )}
               <Button
                 onClick={handleQuery}
                 disabled={!walletAddress || isLoading}
@@ -381,7 +414,7 @@ export function BalanceApiPage() {
         )}
 
         {/* Empty State */}
-        {balances.length === 0 && !isLoading && !error && (
+        {balances.length === 0 && !isLoading && !error && !rawBalanceData && (
           <Card className="text-center py-12">
             <CardContent>
               <Wallet className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
@@ -390,6 +423,51 @@ export function BalanceApiPage() {
                 Enter a wallet address above to query multi-token balances on{' '}
                 {DEFAULT_CHAIN.name}
               </p>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Raw Balance Data Table - Show when there's data but no processed balances */}
+        {rawBalanceData && balances.length === 0 && !isLoading && !error && (
+          <Card className="text-center py-12">
+            <CardContent>
+              <div className="mt-6 p-4 bg-muted rounded-lg max-h-96 overflow-auto">
+                <h4 className="font-semibold mb-2">Raw Balance Data:</h4>
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead className="bg-gray-50 dark:bg-gray-800">
+                      <tr>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                        >
+                          Token Address
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                        >
+                          Balance
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+                      {Object.entries(rawBalanceData).map(
+                        ([address, balance]) => (
+                          <tr key={address}>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-900 dark:text-gray-100">
+                              {address}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+                              {balance as string}
+                            </td>
+                          </tr>
+                        )
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </CardContent>
           </Card>
         )}

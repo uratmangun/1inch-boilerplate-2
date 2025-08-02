@@ -6,7 +6,8 @@
     "function": "deno run --allow-net --allow-read --allow-env functions/hello.ts"
   },
   "imports": {
-    "@std/": "https://deno.land/std@0.208.0/"
+    "@std/": "https://deno.land/std@0.208.0/",
+    "dotenv": "https://deno.land/x/dotenv/mod.ts"
   },
   "compilerOptions": {
     "allowJs": true,

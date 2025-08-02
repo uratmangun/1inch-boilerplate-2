@@ -25,6 +25,9 @@ export const API_ENDPOINTS = {
   // Deno function endpoints
   BALANCE: '/api/balance',
   HELLO: '/api/hello',
+  SPOT_PRICE: '/api/spot-price',
+  HISTORY: '/api/history',
+  PORTFOLIO: '/api/portfolio',
 } as const
 
 /**

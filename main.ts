@@ -1,11 +1,17 @@
 // Main entry point for Deno Deploy - routes to all functions
 import helloFunction from './functions/hello.ts'
 import balanceFunction from './functions/balance.ts'
+import portfolioFunction from './functions/portfolio.ts'
+import historyFunction from './functions/history.ts'
+import spotPriceFunction from './functions/spot-price.ts'
 
 // Function registry - add new functions here
 const functions = {
   hello: helloFunction,
   balance: balanceFunction,
+  portfolio: portfolioFunction,
+  history: historyFunction,
+  'spot-price': spotPriceFunction,
   // Add more functions here as you create them
   // example: exampleFunction,
 }
