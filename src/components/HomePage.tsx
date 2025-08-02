@@ -6,8 +6,18 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Github, ExternalLink, Zap, Shield, Rocket, Code, Globe, Wallet } from 'lucide-react'
+import {
+  Github,
+  ExternalLink,
+  Zap,
+  Shield,
+  Rocket,
+  Code,
+  Globe,
+  Wallet,
+} from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { PrivyLoginButton } from '@/components/PrivyLoginButton'
 
 export function HomePage() {
   return (
@@ -25,17 +35,23 @@ export function HomePage() {
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
             Use this template to create your 1inch project
           </p>
-          
-          {/* Check Balance Button */}
-          <div className="mb-12">
-            <Button size="lg" asChild className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-8 py-3 text-lg">
-              <Link to="/balance" className="flex items-center gap-2">
+
+          {/* Action Buttons */}
+          <div className="mb-12 flex flex-col sm:flex-row gap-4 items-center justify-center">
+            <Button
+              size="lg"
+              asChild
+              className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-8 py-3 text-lg"
+            >
+              <Link to="/api-explorer" className="flex items-center gap-2">
                 <Wallet className="h-5 w-5" />
-                Check Balance
+                See All
               </Link>
             </Button>
+
+            <PrivyLoginButton />
           </div>
-          
+
           {/* Repository Link & Usage Instructions */}
           <div className="max-w-4xl mx-auto mb-12">
             <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-0 shadow-xl">
@@ -51,10 +67,14 @@ export function HomePage() {
               <CardContent className="space-y-6">
                 {/* Repository Link */}
                 <div className="text-center">
-                  <Button size="lg" asChild className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 text-lg">
-                    <a 
-                      href="https://github.com/uratmangun/1inch-boilerplate-2" 
-                      target="_blank" 
+                  <Button
+                    size="lg"
+                    asChild
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 text-lg"
+                  >
+                    <a
+                      href="https://github.com/uratmangun/1inch-boilerplate-2"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2"
                     >
@@ -75,13 +95,18 @@ export function HomePage() {
                     </h3>
                     <div className="bg-slate-900 dark:bg-slate-800 rounded-lg p-4 relative group">
                       <code className="text-green-400 font-mono text-sm block break-all">
-                        gh repo create my-1inch-project --template uratmangun/1inch-boilerplate-2 --public --clone
+                        gh repo create my-1inch-project --template
+                        uratmangun/1inch-boilerplate-2 --public --clone
                       </code>
                       <Button
                         variant="ghost"
                         size="sm"
                         className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-white"
-                        onClick={() => navigator.clipboard.writeText('gh repo create my-1inch-project --template uratmangun/1inch-boilerplate-2 --public --clone')}
+                        onClick={() =>
+                          navigator.clipboard.writeText(
+                            'gh repo create my-1inch-project --template uratmangun/1inch-boilerplate-2 --public --clone'
+                          )
+                        }
                       >
                         Copy
                       </Button>
@@ -96,13 +121,18 @@ export function HomePage() {
                     </h3>
                     <div className="bg-slate-900 dark:bg-slate-800 rounded-lg p-4 relative group">
                       <code className="text-blue-400 font-mono text-sm block break-all">
-                        gh repo create my-1inch-project --template uratmangun/1inch-boilerplate-2 --private --clone
+                        gh repo create my-1inch-project --template
+                        uratmangun/1inch-boilerplate-2 --private --clone
                       </code>
                       <Button
                         variant="ghost"
                         size="sm"
                         className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-white"
-                        onClick={() => navigator.clipboard.writeText('gh repo create my-1inch-project --template uratmangun/1inch-boilerplate-2 --private --clone')}
+                        onClick={() =>
+                          navigator.clipboard.writeText(
+                            'gh repo create my-1inch-project --template uratmangun/1inch-boilerplate-2 --private --clone'
+                          )
+                        }
                       >
                         Copy
                       </Button>
@@ -112,12 +142,37 @@ export function HomePage() {
 
                 {/* Quick Setup Instructions */}
                 <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-                  <h4 className="font-semibold text-blue-800 dark:text-blue-300 mb-2">Quick Setup Instructions:</h4>
+                  <h4 className="font-semibold text-blue-800 dark:text-blue-300 mb-2">
+                    Quick Setup Instructions:
+                  </h4>
                   <ul className="text-sm text-blue-700 dark:text-blue-400 space-y-1">
-                    <li>• Replace <code className="bg-blue-100 dark:bg-blue-900 px-1 rounded">my-1inch-project</code> with your desired project name</li>
-                    <li>• The <code className="bg-blue-100 dark:bg-blue-900 px-1 rounded">--clone</code> flag automatically clones the repo to your local machine</li>
-                    <li>• After cloning, run <code className="bg-blue-100 dark:bg-blue-900 px-1 rounded">pnpm install</code> to install dependencies</li>
-                    <li>• Start development with <code className="bg-blue-100 dark:bg-blue-900 px-1 rounded">pnpm dev</code></li>
+                    <li>
+                      • Replace{' '}
+                      <code className="bg-blue-100 dark:bg-blue-900 px-1 rounded">
+                        my-1inch-project
+                      </code>{' '}
+                      with your desired project name
+                    </li>
+                    <li>
+                      • The{' '}
+                      <code className="bg-blue-100 dark:bg-blue-900 px-1 rounded">
+                        --clone
+                      </code>{' '}
+                      flag automatically clones the repo to your local machine
+                    </li>
+                    <li>
+                      • After cloning, run{' '}
+                      <code className="bg-blue-100 dark:bg-blue-900 px-1 rounded">
+                        pnpm install
+                      </code>{' '}
+                      to install dependencies
+                    </li>
+                    <li>
+                      • Start development with{' '}
+                      <code className="bg-blue-100 dark:bg-blue-900 px-1 rounded">
+                        pnpm dev
+                      </code>
+                    </li>
                   </ul>
                 </div>
               </CardContent>
@@ -139,7 +194,8 @@ export function HomePage() {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-gray-600 dark:text-gray-300">
-                Ready-to-use React components for token swaps, liquidity pools, and yield farming with 1inch protocol.
+                Ready-to-use React components for token swaps, liquidity pools,
+                and yield farming with 1inch protocol.
               </p>
             </CardContent>
           </Card>
@@ -156,7 +212,8 @@ export function HomePage() {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-gray-600 dark:text-gray-300">
-                Includes wallet connection security, transaction validation, and smart contract interaction safety measures.
+                Includes wallet connection security, transaction validation, and
+                smart contract interaction safety measures.
               </p>
             </CardContent>
           </Card>
@@ -173,7 +230,8 @@ export function HomePage() {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-gray-600 dark:text-gray-300">
-                Full TypeScript support, comprehensive testing setup, and detailed documentation for rapid development.
+                Full TypeScript support, comprehensive testing setup, and
+                detailed documentation for rapid development.
               </p>
             </CardContent>
           </Card>

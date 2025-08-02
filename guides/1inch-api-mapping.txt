@@ -1,0 +1,31 @@
+# 1inch API Documentation Mapping
+# Source: https://portal.1inch.dev/documentation/apis/
+
+https://portal.1inch.dev/documentation/apis/swap/classic-swap/quick-start
+https://portal.1inch.dev/documentation/apis/authentication
+https://portal.1inch.dev/documentation/apis/history/introduction
+https://portal.1inch.dev/documentation/apis/history/swagger
+https://portal.1inch.dev/documentation/apis/transaction/introduction
+https://portal.1inch.dev/documentation/apis/nft/swagger
+https://portal.1inch.dev/documentation/apis/portfolio/swagger
+https://portal.1inch.dev/documentation/apis/balance/introduction
+https://portal.1inch.dev/documentation/apis/tokens/introduction
+https://portal.1inch.dev/documentation/apis/transaction/swagger
+https://portal.1inch.dev/documentation/apis/portfolio/introduction
+https://portal.1inch.dev/documentation/apis/orderbook/swagger
+https://portal.1inch.dev/documentation/apis/nft/introduction
+https://portal.1inch.dev/documentation/apis/tokens/swagger
+https://portal.1inch.dev/documentation/apis/gas-price/introduction
+https://portal.1inch.dev/documentation/apis/gas-price/swagger
+https://portal.1inch.dev/documentation/apis/orderbook/quick-start
+https://portal.1inch.dev/documentation/apis/history/quick-start
+https://portal.1inch.dev/documentation/apis/token-details/introduction
+https://portal.1inch.dev/documentation/apis/spot-price/swagger
+https://portal.1inch.dev/documentation/apis/spot-price/introduction
+https://portal.1inch.dev/documentation/apis/swap/classic-swap/introduction
+https://portal.1inch.dev/documentation/apis/swap/fusion-plus/introduction
+https://portal.1inch.dev/documentation/apis/swap/classic-swap/swagger
+https://portal.1inch.dev/documentation/apis/swap/intent-swap/introduction
+https://portal.1inch.dev/documentation/apis/orderbook/limit-order-sdk/introduction
+https://portal.1inch.dev/documentation/apis/orderbook/limit-order-sdk/advanced-usage
+https://portal.1inch.dev/documentation/apis/orderbook/swagger?method=get&path=%2Fv4.0%2F1%2Fall
