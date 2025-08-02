@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { BalancePage } from '@/components/BalancePage'
 import { HomePage } from '@/components/HomePage'
 import { ApiExplorerPage } from '@/components/ApiExplorerPage'
+import { BalanceApiPage } from '@/components/BalanceApiPage'
 
 function App() {
   return (
@@ -24,6 +25,10 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/balance" element={<BalancePage />} />
             <Route path="/api-explorer" element={<ApiExplorerPage />} />
+            <Route
+              path="/implementation/balance-api"
+              element={<BalanceApiPage />}
+            />
           </Routes>
         </Router>
       </PrivyProvider>
